@@ -1,0 +1,211 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		AAB2774C17D696BB00277751 /* token-tools.conf.sample */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "token-tools.conf.sample"; sourceTree = "<group>"; };
+		AADA260F17D3F5E000B9E48D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		AADA261017D3F5E000B9E48D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		AADA261117D3F5E000B9E48D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		AADA261217D3F5E000B9E48D /* requirements.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = requirements.txt; sourceTree = "<group>"; };
+		AADA261317D4013100B9E48D /* token-rng.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = "token-rng.py"; sourceTree = "<group>"; };
+		AADA261417D4374700B9E48D /* token-rng.upstart-systempy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "token-rng.upstart-systempy"; sourceTree = "<group>"; };
+		AADA261517D43AC000B9E48D /* token-rng.upstart-virtualenv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "token-rng.upstart-virtualenv"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		AADA260417D3F5A700B9E48D = {
+			isa = PBXGroup;
+			children = (
+				AADA261717D4786E00B9E48D /* Configuration */,
+				AADA261817D4787A00B9E48D /* Init scripts */,
+				AADA261917D4788900B9E48D /* Code */,
+				AADA261A17D4789400B9E48D /* Other */,
+			);
+			sourceTree = "<group>";
+		};
+		AADA261717D4786E00B9E48D /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				AAB2774C17D696BB00277751 /* token-tools.conf.sample */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		AADA261817D4787A00B9E48D /* Init scripts */ = {
+			isa = PBXGroup;
+			children = (
+				AADA261517D43AC000B9E48D /* token-rng.upstart-virtualenv */,
+				AADA261417D4374700B9E48D /* token-rng.upstart-systempy */,
+			);
+			name = "Init scripts";
+			sourceTree = "<group>";
+		};
+		AADA261917D4788900B9E48D /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				AADA261317D4013100B9E48D /* token-rng.py */,
+			);
+			name = Code;
+			sourceTree = "<group>";
+		};
+		AADA261A17D4789400B9E48D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				AADA260F17D3F5E000B9E48D /* .gitignore */,
+				AADA261017D3F5E000B9E48D /* README.md */,
+				AADA261117D3F5E000B9E48D /* LICENSE */,
+				AADA261217D3F5E000B9E48D /* requirements.txt */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		AADA260917D3F5A700B9E48D /* TokenTools */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = AADA260C17D3F5A700B9E48D /* Build configuration list for PBXLegacyTarget "TokenTools" */;
+			buildPhases = (
+			);
+			buildToolPath = open;
+			dependencies = (
+			);
+			name = TokenTools;
+			passBuildSettingsInEnvironment = 1;
+			productName = TokenRNG;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		AADA260517D3F5A700B9E48D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = infincia;
+			};
+			buildConfigurationList = AADA260817D3F5A700B9E48D /* Build configuration list for PBXProject "TokenTools" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AADA260417D3F5A700B9E48D;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AADA260917D3F5A700B9E48D /* TokenTools */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		AADA260A17D3F5A700B9E48D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AADA260B17D3F5A700B9E48D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AADA260D17D3F5A700B9E48D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = TokenTools;
+			};
+			name = Debug;
+		};
+		AADA260E17D3F5A700B9E48D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = TokenTools;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AADA260817D3F5A700B9E48D /* Build configuration list for PBXProject "TokenTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AADA260A17D3F5A700B9E48D /* Debug */,
+				AADA260B17D3F5A700B9E48D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AADA260C17D3F5A700B9E48D /* Build configuration list for PBXLegacyTarget "TokenTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AADA260D17D3F5A700B9E48D /* Debug */,
+				AADA260E17D3F5A700B9E48D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AADA260517D3F5A700B9E48D /* Project object */;
+}
