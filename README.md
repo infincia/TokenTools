@@ -2,7 +2,7 @@
 
 TokenTools is a set of simple utilities for interacting with cryptographic tokens like smartcards, hardware security modules (HSMs) and other similar devices.
 
-TokenTools is a successor project to a program I wrote a few years ago called CardRand, which I am [deprecating](#deprecating) in favor of something cleaner, more capable and reliable.
+TokenTools is a successor project to a program I wrote a few years ago called CardRand, which I am [deprecating](#deprecating-cardrand) in favor of something cleaner, more capable and reliable.
 
 ##TokenRNG
 
@@ -10,7 +10,7 @@ The first addition to TokenTools is TokenRNG,  a direct replacement for CardRand
 
 ###Setup
 
-Before you try to use anything in TokenTools, you need to ensure you have a working cryptographic token with all the right drivers and libraries installed. Some minor assistance to help you with that is available [here](#tokens).
+Before you try to use anything in TokenTools, you need to ensure you have a working cryptographic token with all the right drivers and libraries installed. Some minor assistance to help you with that is available in the [Token Support](#token-support) section.
 
 Very minimal setup is required to use TokenRNG from the git repository, but you do need to install any libraries required to support your cryptographic token, and one Python library which can be installed either from your Linux package manager or from PyPi into a virtualenv.
 
@@ -76,7 +76,7 @@ Otherwise:
     service token-rng start
 
 
-##<a id="tokens"></a>Token Support
+##Token Support
 
 You'll  need a working PKCS#11 library and drivers for your token, and you'll need to ensure you can use the token on the system before trying to get TokenTools to work with it.
 
@@ -113,7 +113,7 @@ Plug in your token and run one of these:
      
 If your token shows up with any of those commands, you shouldn't have much trouble getting it to work with TokenTools. If nothing shows up, 'pcscd' or 'openct' or a proprietary service for your token may need to be running, check the documentation for it.
 
-##<a id="deprecating"></a>Deprecating CardRand ##
+##Deprecating CardRand
 
 CardRand was a simple C program that used the hardware random number generator (HWRNG) present in many smartcard/eToken devices as a random number source for the Linux kernel entropy pool, allowing systems that don't otherwise have a high quality HWRNG built-in to attach one easily, even on systems like laptops or embedded ARM devices where connecting a PCI card or making internal modifications is not possible. Only a USB port on the host and a USB cryptographic token are required in most cases, which are both very common.
 
