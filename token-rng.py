@@ -26,7 +26,7 @@ tokenrng_config.read('/etc/token-tools.conf')
 
 """
 
-PROC_DEV_RANDOM = '/dev/random'
+FS_DEV_RANDOM = '/dev/random'
 PROC_ENTROPY_AVAIL = '/proc/sys/kernel/random/entropy_avail'
 
 DEBUG = tokenrng_config.getboolean('Global', 'debug')
@@ -138,7 +138,7 @@ def run_loop():
                                           len(random_sample) * ENTROPY_RATIO,
                                           len(random_sample),
                                           str(random_sample))
-                with open(PROC_DEV_RANDOM, 'a+') as dev_random:
+                with open(FS_DEV_RANDOM, 'a+') as dev_random:
                     fcntl.ioctl(dev_random, RNDADDENTROPY, packed_data)
                 print_entropy_avail()
             time.sleep(1)
