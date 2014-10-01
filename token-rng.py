@@ -143,7 +143,8 @@ def run_loop():
                 with open(FS_DEV_RANDOM, 'a+') as dev_random:
                     fcntl.ioctl(dev_random, RNDADDENTROPY, packed_data)
                 print_entropy_avail()
-            time.sleep(1)
+            else:
+                time.sleep(1)
     except KeyboardInterrupt as e:
         log.debug('Exiting due to keyboard interrupt')
         sys.exit(0)
