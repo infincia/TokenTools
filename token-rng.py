@@ -110,12 +110,14 @@ def pkcs11_reset(library=None):
         log.debug('Initializing library: %s' % library)
         pkcs11_api = PyKCS11.PyKCS11Lib()
         pkcs11_api.load(library)
-        try:
-            token_session = pkcs11_api.openSession(READER_SLOT)
-            log.debug('Initialized session: %s' % token_session)
-        except PyKCS11.PyKCS11Error as e:
-            token_session = None
-            log.error('Token session unavailable at slot: %s', READER_SLOT)
+        while token_session is None:
+            try:
+                token_session = pkcs11_api.openSession(READER_SLOT)
+                log.debug('Token session initialized: %s' % token_session)
+            except PyKCS11.PyKCS11Error as e:
+                token_session = None
+                log.error('Token session unavailable at slot: %s, check configuration', READER_SLOT)
+            time.sleep(3)
 
 def print_entropy_avail():
     with open(PROC_ENTROPY_AVAIL, 'r') as entropy_avail:
