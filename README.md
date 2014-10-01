@@ -8,6 +8,20 @@ TokenTools is a successor project to a program I wrote a few years ago called Ca
 
 The first addition to TokenTools is TokenRNG,  a direct replacement for CardRand. Instead of using libopensc directly as CardRand did, TokenRNG uses the standard PKCS#11 interface, so any device that is supported by a PKCS#11 library should work, including all devices that work with OpenSC as they provide a PKCS#11 library.
 
+###Security notes
+
+It is possible that your cryptographic token is not actually giving you good
+quality random data, and it is also possible that your PKCS#11 library is altering
+what the token provides. All TokenRNG can do is make it possible to use them as
+a kernel entropy source, trust and entropy quality decisions are up to you.
+
+By default, TokenRNG tells the kernel that there are only 2 bits of entropy per 
+byte of data received from the PKCS#11 library (the entropy_ratio configuration
+setting). This is probably a sane default in most cases. Setting it to zero will
+still mix random data from your device into the kernel pool without increasing
+the entropy count. Setting it to 8 is probably unwise without a very good reason.
+
+
 ###Setup
 
 Before you try to use anything in TokenTools, you need to ensure you have a working cryptographic token with all the right drivers and libraries installed. Some minor assistance to help you with that is available in the [Token Support](#token-support) section.
