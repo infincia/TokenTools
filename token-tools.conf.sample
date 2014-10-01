@@ -2,8 +2,8 @@
 # Common library locations
 # safenet                                                 
 #pkcs11_library = /lib64/libeToken.so.8.1
-# opensc                             
-pkcs11_library = /usr/lib/opensc-pkcs11.so
+# opensc on x86_64 in debian/ubuntu
+pkcs11_library = /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so
 reader_slot = 0
 random_chunk_size = 128
 entropy_ratio = 2
