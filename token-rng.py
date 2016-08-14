@@ -6,18 +6,18 @@ import struct
 import sys
 import os
 import logging
-import ConfigParser
+import configparser
 import binascii
 
 # Defaults for the program constants, DO NOT change them here, insert your own
 # values in /etc/token-tools.conf
-tokenrng_defaults = {'pkcs11_library': '/usr/lib/opensc-pkcs11.so',
-                        'reader_slot': '0',
-                  'random_chunk_size': '128',
-                      'entropy_ratio': '2',
-                              'debug': 'no'}
+tokenrng_defaults = {'pkcs11_library': '/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so',
+                        'reader_slot': 0,
+                  'random_chunk_size': 128,
+                      'entropy_ratio': 2,
+                              'debug': False}
 
-tokenrng_config = ConfigParser.ConfigParser(defaults=tokenrng_defaults)
+tokenrng_config = configparser.ConfigParser(defaults=tokenrng_defaults)
 tokenrng_config.read('/etc/token-tools.conf')
 
 
@@ -29,24 +29,29 @@ tokenrng_config.read('/etc/token-tools.conf')
 FS_DEV_RANDOM = '/dev/random'
 PROC_ENTROPY_AVAIL = '/proc/sys/kernel/random/entropy_avail'
 
-DEBUG = tokenrng_config.getboolean('Global', 'debug')
+DEBUG = tokenrng_config.getboolean('Global', 'debug',
+                                   fallback=tokenrng_defaults['debug'])
 
 # The actual PKCS#11 library on the system used to interact with your
 # cryptographic token, defaults to OpenSC
-PKCS11_LIBRARY = tokenrng_config.get('Global', 'pkcs11_library')
+PKCS11_LIBRARY = tokenrng_config.get('Global', 'pkcs11_library',
+                                     fallback=tokenrng_defaults['pkcs11_library'])
 
 # Which reader slot is the token connected to, should be zero when only one
 # token is ever connected
-READER_SLOT = tokenrng_config.getint('Global', 'reader_slot')
+READER_SLOT = tokenrng_config.getint('Global', 'reader_slot',
+                                     fallback=tokenrng_defaults['reader_slot'])
 
 # How much random data to request from the library in each pass
-RANDOM_CHUNK_SIZE = tokenrng_config.getint('Global', 'random_chunk_size')
+RANDOM_CHUNK_SIZE = tokenrng_config.getint('Global', 'random_chunk_size',
+                                           fallback=tokenrng_defaults['random_chunk_size'])
 
 # Depending on the device + PKCS#11 library, the actual entropy per byte
 # received may be less than 8bits per byte, so we must make it configurable by
 # the user. Defaults low at 2bits per byte, increase if you're SURE your
 # device+library provide more. 
-ENTROPY_RATIO = tokenrng_config.getint('Global', 'entropy_ratio')
+ENTROPY_RATIO = tokenrng_config.getint('Global', 'entropy_ratio',
+                                       fallback=tokenrng_defaults['entropy_ratio'])
 
 
 # This IOCTL macro was derived from include/uapi/linux/random.h in linux source
@@ -112,11 +117,15 @@ def pkcs11_reset(library=None):
         pkcs11_api.load(library)
         while token_session is None:
             try:
+                # Session doesn't initialize without this, does initialize on
+                # 2nd attempt with it. TODO:0 Investigate why this fixes it.
+                pkcs11_api.getSlotList()
                 token_session = pkcs11_api.openSession(READER_SLOT)
                 log.debug('Token session initialized: %s' % token_session)
             except PyKCS11.PyKCS11Error as e:
                 token_session = None
                 log.error('Token session unavailable at slot: %s, check configuration', READER_SLOT)
+                log.error(pkcs11_api.getSlotList())
             time.sleep(3)
 
 def print_entropy_avail():
@@ -128,7 +137,11 @@ def print_entropy_avail():
 def run_loop():
     log.info('TokenRNG initializing at %s', time.ctime())
     log.debug('Config defaults: %s', tokenrng_config.defaults())
-    log.debug('Config token: %s', tokenrng_config.items('Global'))
+    try:
+        log.debug('Config token: %s', tokenrng_config.items('Global'))
+    except configparser.NoSectionError:
+        log.debug('Unable to load /etc/token-tools.conf')
+                                                        
     try:
         while RUN_LOOP:
             if token_session is None:
@@ -139,7 +152,7 @@ def run_loop():
                 packed_data = struct.pack(fmt,
                                           len(random_sample) * ENTROPY_RATIO,
                                           len(random_sample),
-                                          str(random_sample))
+                                          bytes(random_sample))
                 with open(FS_DEV_RANDOM, 'a+') as dev_random:
                     fcntl.ioctl(dev_random, RNDADDENTROPY, packed_data)
                 print_entropy_avail()
